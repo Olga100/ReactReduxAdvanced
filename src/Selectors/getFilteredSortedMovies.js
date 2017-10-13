@@ -1,14 +1,15 @@
 import {createSelector} from 'reselect'
 
-const getMovies = state => state.movies;
+const getMovies = state => state.movies;    
 
 const getFilter = state => state.viewState.filter;
 
 const getSortBy = state => state.viewState.sortBy;
 
-export const getFilteredSortedMovies = createSelector(
+export const getFilteredSortedMovies = createSelector(              
+                                                                 
     [getMovies, getFilter, getSortBy],
-    (movies, filter, sortBy) => {
+    (movies, filter, sortBy) => {                                     
         let items = [];
 
         if (!filter) {
@@ -22,7 +23,7 @@ export const getFilteredSortedMovies = createSelector(
         }
 
         if (sortBy) {
-            items.sort((a, b) => b[sortBy] - a[sortBy]);
+            items.sort((a, b) => b[sortBy] - a[sortBy]);                 
         }
 
         return items;

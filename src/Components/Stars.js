@@ -21,7 +21,7 @@ class Stars extends React.Component {
     renderStar(filled, value) {
         const character = filled ? String.fromCharCode(0x2605) : String.fromCharCode(0x2606);
 
-        return (<span key={value} onClick={() => this.setStars(value)}>{character}</span>);
+        return (<span key={value} onClick={() => this.setStars(value)}>{character}</span>);              
     }
 
     render() {

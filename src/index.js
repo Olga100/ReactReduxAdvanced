@@ -1,22 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {combineReducers, createStore, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import './index.css';
-import registerServiceWorker from './registerServiceWorker';
+import {combineReducers, createStore, applyMiddleware} from 'redux';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import {Provider} from 'react-redux'
-import Movies from './Movies';
-import Home from './Home';
-import About from './About';
-import CreateMovie from './CreateMovie';
-import EditMovie from './EditMovie';
-import PageNotFound from './PageNotFound';
-import {currentMovieReducer, moviesReducer, viewStateReducer} from './reducers';
-import {fetchMovies} from './Actions';
+import './CSS/index.css';
+import registerServiceWorker from './registerServiceWorker';
+import Movies from './Containers/MoviesIndex';
+import Home from './Components/Home';
+import About from './Components/About';
+import CreateMovie from './Containers/CreateMovie';
+import EditMovie from './Containers/EditMovie';
+import PageNotFound from './Components/PageNotFound';
+import {currentMovieReducer, moviesReducer, viewStateReducer} from './Reducers/reducers';
+
 
 const combinedReducers = combineReducers({
-    movies: moviesReducer,
+    movies: moviesReducer,                 
     currentMovie: currentMovieReducer,
     viewState: viewStateReducer
 });
@@ -30,7 +30,7 @@ const store = createStore(combinedReducers, {
     },
     applyMiddleware(thunkMiddleware));
 
-store.dispatch(fetchMovies());
+ 
 
 
 ReactDOM.render(

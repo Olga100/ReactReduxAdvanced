@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux'
-import {createMovie} from './Actions';
+import {createMovie} from '../Actions/Actions';
 
 class CreateMovieForm extends React.Component {
 
@@ -80,3 +80,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 const CreateMovie = connect(null, mapDispatchToProps)(CreateMovieForm);
 
 export default CreateMovie;
+ 

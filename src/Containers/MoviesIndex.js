@@ -1,13 +1,18 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux'
-import './App.css';
+import {connect} from 'react-redux';
+import '../CSS/App.css';
 import MovieList from './MovieList';
-import Details from './MovieDetails';
-import MainHeader from './MainHeader';
+import MovieDetails from './MovieDetails';
+import MainHeader from '../Components/MainHeader';
 import {Link} from 'react-router';
-import {setAdmin} from './Actions';
+import {setAdmin, fetchMovies} from '../Actions/Actions';
 
-class MoviesView extends Component {
+
+class MoviesIndexView extends Component {
+
+    componentDidMount() {
+       this.props.loadMovies();        
+    }
 
     renderModeButton() {
         if (!this.props.isAdmin) {
@@ -31,12 +36,6 @@ class MoviesView extends Component {
     }
 
     render() {
-        var movieDetails = null;
-
-        if (this.props.currentMovie) {
-            movieDetails = <Details movie={this.props.currentMovie}/>;
-        }
-
         return (
             <div className="App">
 
@@ -52,12 +51,12 @@ class MoviesView extends Component {
                     </div>
                 </div>
 
-                <div id="movie-list-container">
+                <div className="movie-list-container">
                     <MovieList />
                 </div>
 
-                <div id="movie-details-container">
-                    { movieDetails }
+                <div className="movie-details-container">
+                    <MovieDetails />
                 </div>
 
                 <div className="clear"></div>
@@ -69,17 +68,17 @@ class MoviesView extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    currentMovie: state.currentMovie,
-    isAdmin: state.viewState.isAdmin
+    isAdmin: state.viewState.isAdmin  
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     setAdmin: () => dispatch(setAdmin(true)),
-    setUser: () => dispatch(setAdmin(false))
+    setUser: () => dispatch(setAdmin(false)),
+    loadMovies: () => dispatch(fetchMovies())
 });
 
-const Movies = connect(mapStateToProps, mapDispatchToProps)(MoviesView);
+const MoviesIndex = connect(mapStateToProps, mapDispatchToProps)(MoviesIndexView);
 
-export default Movies;
+export default MoviesIndex;
 
 

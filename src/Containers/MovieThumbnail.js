@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import Stars from './Stars';
-import {selectMovie, updateMovieLikes, setRating} from './Actions';
+import Stars from '../Components/Stars';
+import {selectMovie, updateMovieLikes, setRating} from '../Actions/Actions';
 
 class MovieThumbnailView extends React.Component {
 
     render() {
         const movie = this.props.movie;
-
+                                                                              //стр.12 по клику я посылаю весь муви(из муви лист)
         return (
             <div className="movie-thumbnail-title" onClick={this.props.selectMovie}>
                 <div className="title">
@@ -32,10 +32,10 @@ class MovieThumbnailView extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    selectMovie: () => dispatch(selectMovie(ownProps.movie)),
+    selectMovie: () => dispatch(selectMovie(ownProps.movie.id)),    // dispatch({type: SELECT_MOVIE; id: ownProps.movie.id)})
     incrementLikes: () => dispatch(updateMovieLikes(ownProps.movie.id, 1)),
     decrementLikes: () => dispatch(updateMovieLikes(ownProps.movie.id, -1)),
-    setRating: (rating) => dispatch(setRating(ownProps.movie.id, rating))
+    setRating: rating => dispatch(setRating(ownProps.movie.id, rating))
 });
 
 const MovieThumbnail = connect(null, mapDispatchToProps)(MovieThumbnailView);

@@ -109,18 +109,18 @@ html, body {
     }
 }
 
-#movie-list-container {
+.movie-list-container {
     width: 60%;
     float: left;
     height: 100%;
 }
 
-#movie-details-container {
+.movie-details-container {
     width: 40%;
     float: left;
 }
 
-#movie-details-left {
+.movie-details-left {
     width: 21%;
     float: left;
     margin: 10px;
@@ -128,7 +128,7 @@ html, body {
     padding-left: 3px;
 }
 
-#movie-details-right {
+.movie-details-right {
     width: 72%;
     float: left;
     text-align: left;
@@ -140,11 +140,11 @@ html, body {
     text-align: center;
 }
 
-#movie-details-right img {
+.movie-details-right img {
     height: 400px;
 }
 
-#movie-details-right div {
+.movie-details-right div {
     padding-left: 5px;
 }
 

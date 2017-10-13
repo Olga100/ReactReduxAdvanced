@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux'
-import {updateMovie} from './Actions';
+import {updateMovie} from '../Actions/Actions';
 
 class EditMovieForm extends React.Component {
     constructor(props) {
@@ -59,7 +59,8 @@ class EditMovieForm extends React.Component {
                 <div className="inputContainer">Description
                     <textarea name="text" rows="6" cols="30" className="descriptionForm"
                               placeholder="enter the description of the movie"
-                              ref={ (node) => this.state.desciptionInput = node}>{movie.description}</textarea>
+                              ref={ (node) => this.state.desciptionInput = node}
+                              defaultValue={movie.description}></textarea>
                 </div>
 
                 <button type="submit" id="submitCreateForm" onClick={() => this.props.updateMovie(this.getMovie())}>

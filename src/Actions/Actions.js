@@ -1,12 +1,15 @@
 import fetch from 'isomorphic-fetch';
 import {browserHistory} from 'react-router';
 
-export function selectMovie(movie) {
+export const SELECT_MOVIE = 'SELECT_MOVIE';
+
+export function selectMovie(id) {
     return {
-        type: 'SELECT_MOVIE',
-        movie: movie
+        type: SELECT_MOVIE,
+        id: id
     }
 }
+export const SET_ADMIN = 'SET_ADMIN';
 
 export function setAdmin(isAdmin) {
     return {
@@ -14,6 +17,7 @@ export function setAdmin(isAdmin) {
         isAdmin: isAdmin
     }
 }
+export const SORT_BY = 'SORT_BY';
 
 export function sortBy(field) {
     return {
@@ -21,6 +25,7 @@ export function sortBy(field) {
         field: field
     }
 }
+export const FILTER = 'FILTER';
 
 export function filter(value) {
     return {
@@ -28,23 +33,25 @@ export function filter(value) {
         value: value
     }
 }
+export const RECEIVE_MOVIES = 'RECEIVE_MOVIES';
 
-export function receiveMovies(movies) {
+export function receiveMovies(movies) {           
     return {
         type: 'RECEIVE_MOVIES',
         movies: movies
     }
 }
+export const RECEIVE_MOVIE = 'RECEIVE_MOVIE';
 
-export function receiveMovie(movie) {
+export function receiveMovie(movie) {         
     return {
         type: 'RECEIVE_MOVIE',
         movie: movie
     }
 }
 
-export function fetchMovies() {
-    return function (dispatch) {
+export function fetchMovies() {               
+    return function (dispatch) {            
         return fetch("http://localhost:3001/movies")
             .then(
                 response => response.json(),
@@ -70,14 +77,14 @@ export function createMovie(movie) {
             )
             .then(movie => {
                 dispatch(receiveMovie(movie));
-                browserHistory.push("/movies");
+                browserHistory.push("/movies");               
             });
     }
 }
 
 export function updateMovie(movie) {
     return function (dispatch) {
-        return fetch("http://localhost:3001/movies/" + movie.id,
+        return fetch(`http://localhost:3001/movies/${movie.id}`,
             {
                 method: "PUT",
                 headers: {'content-type': 'application/json'},
@@ -96,7 +103,7 @@ export function updateMovie(movie) {
 
 export function updateMovieLikes(id, likes) {
     return function (dispatch) {
-        return fetch("http://localhost:3001/movies/" + id)
+        return fetch(`http://localhost:3001/movies/${id}`)
             .then(
                 response => response.json(),
                 error => console.log(error)
@@ -110,7 +117,7 @@ export function updateMovieLikes(id, likes) {
 
 export function setRating(id, rating) {
     return function (dispatch) {
-        return fetch("http://localhost:3001/movies/" + id)
+        return fetch(`http://localhost:3001/movies/${id}`)
             .then(
                 response => response.json(),
                 error => console.log(error)
@@ -121,16 +128,23 @@ export function setRating(id, rating) {
             });
     }
 }
+export const RECEIVE_ID_DELETE = 'RECEIVE_ID_DELETE';
+
+export function receiveDeleteId(id) {
+    return {
+        type: 'RECEIVE_ID_DELETE',
+        id: id
+    }
+}
 
 export function deleteMovie(id) {
     return function (dispatch) {
-        return fetch("http://localhost:3001/movies/" + id,
+        return fetch(`http://localhost:3001/movies/${id}`,       
             {
                 method: 'DELETE'
             })
-            .then(
-                response => dispatch(fetchMovies()),
-                error => console.log(error)
-            );
+            .then( () => {
+                dispatch(receiveDeleteId(id));
+    });
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Input extends React.Component {
+class InputSearch extends React.Component {
 
     constructor(props) {
         super(props);
@@ -34,8 +34,8 @@ class Input extends React.Component {
     }
 }
 
-Input.propTypes = {
+InputSearch.propTypes = {
     onFilter: PropTypes.func
 };
 
-export default Input;
+export default InputSearch;
